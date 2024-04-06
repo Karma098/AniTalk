@@ -15,3 +15,4 @@
 - userRoutes,userModels,userControllers defined
 - added userRoutes
 - endpoint for register defined
+- /register endpoint completed
