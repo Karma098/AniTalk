@@ -8,4 +8,10 @@
 # FrontEnd
 - Created Routes for /register, /chat, /login
 - Created Register form and styled it
+- form validation done using toast
+- password visibility functionality added
+
 # Backend
+- userRoutes,userModels,userControllers defined
+- added userRoutes
+- endpoint for register defined
