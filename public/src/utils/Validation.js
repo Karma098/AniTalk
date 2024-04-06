@@ -9,7 +9,7 @@ export const toastOptions={
 };
 
 
-const handleValidation=(values)=>{
+export const handleValidationRegister=(values)=>{
   const {password,confirmPassword,username,email}=values;
   if(password!==confirmPassword){
     toast.error("Password and confirm password should be same",toastOptions);
@@ -27,4 +27,17 @@ const handleValidation=(values)=>{
   return true;
 };
 
-export default handleValidation;
+
+
+export const handleValidationLogin=(values)=>{
+  const {password,username}=values;
+  if(password===""){
+    toast.error("Email and password is required",toastOptions);
+    return false;
+  }else if(username.length===""){
+    toast.error("Email and password is required",toastOptions);
+    return false;
+  }
+  return true;
+};
+

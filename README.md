@@ -10,9 +10,10 @@
 - Created Register form and styled it
 - form validation done using toast
 - password visibility functionality added
-
+- Login page designed
 # Backend
 - userRoutes,userModels,userControllers defined
 - added userRoutes
 - endpoint for register defined
 - /register endpoint completed
+- /login endpoint completed
