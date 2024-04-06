@@ -1,0 +1,1 @@
+export const BG_URL="https://wallpaperaccess.com/full/33211.jpg";
