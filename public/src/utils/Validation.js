@@ -1,6 +1,6 @@
 import {toast} from "react-toastify";
 
-const toastOptions={
+export const toastOptions={
   position:"bottom-right",
   autoClose:8000,
   pauseOnHover:true,

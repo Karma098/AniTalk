@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 import logo from "../assets/logo2.jpg";
-import {ToastContainer} from "react-toastify";
+import {ToastContainer,toast} from "react-toastify";
 import {FaEye,FaEyeSlash} from "react-icons/fa";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import { registerRoute } from "../utils/APIRoutes";
-import handleValidation from "../utils/Validation";
+import handleValidation, { toastOptions } from "../utils/Validation";
 import FormContainer from "../utils/FormContainer";
 
 
@@ -20,12 +20,21 @@ const Register = () => {
     confirmPassword:"",
   });
 
+  const navigate=useNavigate();
+
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     if(handleValidation(values)){
       const {password,confirmPassword,username,email}=values;
-      const {data}=await axios.post(registerRoute,username,email,password,confirmPassword);
+      const {data}=await axios.post(registerRoute,{username,email,password,});
+      if(data.status===false){
+        toast.error(data.msg,toastOptions);
+      };
+      if(data.status===true){
+        localStorage.setItem("AniTalk-user",JSON.stringify(data.user));
+        navigate('/');
+      }
     }
   };
 
