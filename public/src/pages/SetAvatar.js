@@ -3,11 +3,11 @@ import loader from "../assets/loader.gif";
 import { ANIME_ARRAY, AVATAR_URL, BG_URL } from "../utils/constants";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
-import styled from "styled-components";
 import { Buffer } from "buffer";
 import axios from "axios";
 import { toastOptions } from "../utils/Validation";
 import { setAvatarRoute } from "../utils/APIRoutes";
+import Container from "../assets/styles/Container";
 
 const SetAvatar = () => {
   // console.log(avatar);
@@ -22,13 +22,14 @@ const SetAvatar = () => {
     }
   },[]);
 
+
   const setProfilePicture = async () => {
     if(selectedAvatar===undefined){
       toast.error("PLease pick an avatar",toastOptions);
     }else{
       const user=await JSON.parse(localStorage.getItem("AniTalk-user"));
       const route=`${setAvatarRoute}/${user._id}`;
-      const {data}=await axios.post(route,{
+      const {data}=await axios.put(route,{
         image:avatars[selectedAvatar],
       });
       // console.log(data);
@@ -48,7 +49,7 @@ const SetAvatar = () => {
     for (let i = 0; i < 4; i++) {
       const index = Math.floor(Math.random() * 9);
       const anime = ANIME_ARRAY[index];
-      const gender = JSON.parse(localStorage.getItem('AniTalk-user')).gender;
+      const gender = JSON.parse(localStorage.getItem('AniTalk-user'))?.gender;
       // console.log(gender);
       const animeCount = Math.floor(Math.random() * 10) + 1;
 
@@ -101,60 +102,5 @@ const SetAvatar = () => {
   );
 };
 
-const Container = styled.div`
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  flex-direction:column;
-  gap:3rem;
-  // background-image:url(${BG_URL});
-  background-color:#131324;
-  height:100vh;
-  width:100vw;
-  .loader{
-    max-inline-size:100%;
-  }
-  .title-container {
-    h1{
-      color:white;
-    }
-  }
-  .avatars{
-    display:flex;
-    gap:2rem;
-    .avatar{
-      border:0.4rem solid transparent;
-      padding:0.4rem;
-      border-radius:100%;
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      transition:0.5s ease-in-out;
-      img {
-        height:6rem;
-        border-radius:100%;
-      }
-    }
-    .selected{
-      border:0.4rem solid #4e0eff;
-    }
-    
-  }
-  .submit-btn{
-    background-color:	#8b0000;
-    color:white;
-    padding:1rem 2rem;
-    border:none;
-    font-weight:bold;
-    cursor:pointer;
-    border-radius:0.4rem;
-    font-size:1rem;
-    text-transform:uppercase;
-    transition:0.5s ease-in-out;
-    &:hover{
-      background-color:#bb0a1e;
-    }
-  }
-`;
 
 export default SetAvatar;

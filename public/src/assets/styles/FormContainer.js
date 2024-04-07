@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { BG_URL } from "../utils/constants";
+import { BG_URL } from "../../utils/constants";
 
 
 const FormContainer = styled.div`

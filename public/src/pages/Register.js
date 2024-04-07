@@ -7,7 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import { registerRoute } from "../utils/APIRoutes";
 import {handleValidationRegister, toastOptions } from "../utils/Validation";
-import FormContainer from "../utils/FormContainer";
+import FormContainer from "../assets/styles/FormContainer";
 
 
 const Register = () => {
@@ -40,7 +40,7 @@ const Register = () => {
       };
       if(data.status===true){
         localStorage.setItem("AniTalk-user",JSON.stringify(data.user));
-        navigate('/');
+        navigate('/setAvatar');
       }
     }
   };
