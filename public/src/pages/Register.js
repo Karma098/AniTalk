@@ -16,6 +16,7 @@ const Register = () => {
   const [values,setValues]=useState({
     username:"",
     email:"",
+    gender:"",
     password:"",
     confirmPassword:"",
   });
@@ -32,8 +33,8 @@ const Register = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     if(handleValidationRegister(values)){
-      const {password,confirmPassword,username,email}=values;
-      const {data}=await axios.post(registerRoute,{username,email,password,});
+      const {password,gender,username,email}=values;
+      const {data}=await axios.post(registerRoute,{username,email,gender,password,});
       if(data.status===false){
         toast.error(data.msg,toastOptions);
       };
@@ -68,6 +69,11 @@ const Register = () => {
             name="email"
             onChange={(e) => handleChange(e)}
           />
+          <select name="gender" onChange={(e)=>handleChange(e)}>
+          <option value="" disabled selected hidden>Gender</option>
+            <option value="male">male</option>
+            <option value="female">female</option>
+          </select>
           <div className="password-div">
             <input
               type={showPassword?"text":"password"}

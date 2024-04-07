@@ -4,7 +4,7 @@ const bcrypt=require("bcrypt");
 module.exports.register=async (req,res,next)=>{
   // console.log(req.body);
   try{
-    const {username,email,password}=req.body;
+    const {username,email,gender,password}=req.body;
     const usernameCheck=await User.findOne({username:username});
     if(usernameCheck)
       return res.json({msg:"Username already used",status:false});
@@ -15,6 +15,7 @@ module.exports.register=async (req,res,next)=>{
     const hashedPassword=await bcrypt.hash(password,salt);
     const user=await User.create({
       email,
+      gender,
       username,
       password:hashedPassword,
     });
@@ -38,6 +39,21 @@ module.exports.login=async (req,res,next)=>{
     if(!isPasswordValid) return res.json({msg:"Incorrect username or password",status:false});
     delete user.password;
     return res.json({status:true,user});
+  }catch(err){
+    next(err);
+  }
+};
+
+module.exports.setAvatar=async (req,res,next)=>{
+  try{
+    const userId=req.params.id;
+    const avatarImage=req.body.image;
+    const userData=await User.findByIdAndUpdate(userId,{
+      isAvatarImageSet:true,
+      avatarImage,
+    });
+    return res.json({isSet:userData.isAvatarImageSet,
+    image:userData.avatarImage});
   }catch(err){
     next(err);
   }

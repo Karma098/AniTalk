@@ -59,6 +59,23 @@ const FormContainer = styled.div`
         outline:none;
       }
     }
+    select{
+      font-family: 'Blomberg';
+      background-color:transparent;
+      padding:1rem;
+      border:0.1rem solid #8b0000;
+      color:white;
+      width:100%;
+      font-size:1rem;
+      text-transform:lowercase;
+      &:focus{
+        border:0.1rem solid #997af0;
+        outline:none;
+      }
+      option{
+        background-color:black;
+      }
+    }
     button{
       background-color:	#8b0000;
       color:white;
