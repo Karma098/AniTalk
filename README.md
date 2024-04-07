@@ -12,6 +12,8 @@
 - password visibility functionality added
 - Login page designed
 - setAvatar container is done
+- created Chat page with contact component
+- showing the contacts
 
 # Backend
 - userRoutes,userModels,userControllers defined
@@ -20,3 +22,5 @@
 - /register endpoint completed
 - /login endpoint completed
 - endpoint for /setAvatar is created which update the database with image
+- fetched contact from the database and send it to the frontend
+
