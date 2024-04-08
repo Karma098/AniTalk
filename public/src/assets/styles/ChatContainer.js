@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { BG_URL } from "../../utils/constants";
 
 const ChatContainer=styled.div`
   height:100vh;
@@ -9,14 +10,15 @@ const ChatContainer=styled.div`
   gap:1rem;
   align-items:center;
   background-color:#131324;
+  // background-image:url(${BG_URL});
   .container{
     height:85vh;
     width:85vw;
     background-color:#00000076;
     display:grid;
     grid-template-columns:25% 75%;
-    @media screen and (min-width:360px)and(max-width:480px){
-      grid-template-columns:35% 65%;
+    @media only screen and (max-width: 768px){
+      grid-template-columns:0% 100%;
     }
   }
 `;

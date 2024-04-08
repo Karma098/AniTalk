@@ -14,6 +14,10 @@
 - setAvatar container is done
 - created Chat page with contact component
 - showing the contacts
+- made chatComponent
+- made chatInput
+- implemented features like emoji picker
+- welcome screen
 
 # Backend
 - userRoutes,userModels,userControllers defined
@@ -23,4 +27,9 @@
 - /login endpoint completed
 - endpoint for /setAvatar is created which update the database with image
 - fetched contact from the database and send it to the frontend
+- made message model
+- created endpoint for /getAllmsg and /sendmsg
+- created messageRoute and sent messages to database
+- fetched msg to show on user screen
+- Integrated socket.io to make it real time
 

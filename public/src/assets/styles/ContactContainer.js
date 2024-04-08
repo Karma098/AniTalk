@@ -77,7 +77,7 @@ const ContactContainer=styled.div`
         color:white;
       }
     }
-    @media screen and (min-width:360px)and(max-width:480px){
+    @media only screen and (max-width: 768px){
       gap:0.5rem;
       .username{
         h2{

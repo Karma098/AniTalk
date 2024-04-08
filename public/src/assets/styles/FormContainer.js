@@ -12,6 +12,9 @@ const FormContainer = styled.div`
   align-items:center;
   // background-color:#131324;
   background-image:url(${BG_URL});
+  @media only screen and (max-width: 768px){
+    background-size:cover;
+  }
   .brand{
     display:flex;
     align-items:center;
