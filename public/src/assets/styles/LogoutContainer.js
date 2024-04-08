@@ -6,7 +6,7 @@ const LogoutContainer=styled.div`
   align-items:center;
   padding:0.5rem;
   border-radius:0.5rem;
-  background-color:#9e86f3;
+  background-color:#0ba6ff;
   border:none;
   cursor:pointer;
   svg{

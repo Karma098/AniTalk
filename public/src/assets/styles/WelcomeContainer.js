@@ -14,7 +14,8 @@ const WelcomeContainer=styled.div`
       height:10rem;
     }
     h1{
-      font-size:2rem;
+      font-size:1.5rem;
+      margin-bottom:1rem;
     }
     h3{
       font-size:1rem;

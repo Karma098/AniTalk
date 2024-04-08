@@ -20,6 +20,15 @@ const Container = styled.div`
       color:white;
     }
   }
+  @media only screen and (max-width: 768px){
+    .title-container {
+      h1{
+        color:white;
+        font-size:1.4rem;
+      }
+    }
+  }
+
   .avatars{
     display:flex;
     gap:2rem;
@@ -35,7 +44,14 @@ const Container = styled.div`
         height:6rem;
         border-radius:100%;
       }
+      @media only screen and (max-width: 768px){
+        img {
+          height:3.5rem;
+          border-radius:100%;
+        }
+      }
     }
+    
     .selected{
       border:0.4rem solid #4e0eff;
     }

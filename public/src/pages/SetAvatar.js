@@ -3,7 +3,6 @@ import loader from "../assets/loader.gif";
 import { ANIME_ARRAY, AVATAR_URL, BG_URL } from "../utils/constants";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
-import { Buffer } from "buffer";
 import axios from "axios";
 import { toastOptions } from "../utils/Validation";
 import { setAvatarRoute } from "../utils/APIRoutes";
@@ -44,24 +43,37 @@ const SetAvatar = () => {
     }
   };
 
-  useEffect(() => {
-    const data = [];
-    for (let i = 0; i < 4; i++) {
-      const index = Math.floor(Math.random() * 9);
-      const anime = ANIME_ARRAY[index];
-      const gender = JSON.parse(localStorage.getItem('AniTalk-user'))?.gender;
-      // console.log(gender);
-      const animeCount = Math.floor(Math.random() * 10) + 1;
 
-      const avatar = AVATAR_URL + anime + "/" + gender + "/" + animeCount + ".jpg";
-      const image = avatar;
-      // console.log(image);
-      // const buffer = new Buffer(image);
-      data.push(image);
-    }
-    setAvatars(data);
-    setIsLoading(false);
-  }, []);
+useEffect(() => {
+  const fetchData = async () => {
+      console.log("ding1");
+      const promises = [];
+      const data = [];
+      while (data.length < 4) {
+          for (let i = data.length; i < 4; i++) {
+              const index = Math.floor(Math.random() * 9);
+              const anime = ANIME_ARRAY[index];
+              const gender = JSON.parse(localStorage.getItem('AniTalk-user'))?.gender;
+              const animeCount = Math.floor(Math.random() * 50) + 1;
+              const avatar = AVATAR_URL + anime + "/" + gender + "/" + animeCount + ".jpg";
+              promises.push(fetch(avatar).then(response => {
+                  if (response.status !== 404) {
+                      data.push(avatar);
+                  }
+              }));
+          }
+          await Promise.all(promises); // Wait for all promises to resolve before checking if more avatars need to be fetched
+      }
+      setAvatars(data);
+      console.log("ding ding");
+      setIsLoading(false);
+    };
+    
+    fetchData();
+}, []);
+
+
+
 
   return (
     <>

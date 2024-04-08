@@ -54,6 +54,21 @@ const ContactContainer=styled.div`
           color:white;
         }
       }
+      @media only screen and (max-width: 768px){
+        min-height:3rem;
+        .avatar{
+          img{
+            height:2rem;
+            border-radius:100%;
+          }
+        }
+        .username{
+          h3{
+            font-size:1rem;
+            color:white;
+          }
+        }
+      }
     }
     .selected{
       background-color:#9a86f3;
@@ -78,6 +93,13 @@ const ContactContainer=styled.div`
       }
     }
     @media only screen and (max-width: 768px){
+      .avatar{
+        img{
+          height:2rem;
+          max-inline-size:100%;
+          border-radius:100%;
+        }
+      }
       gap:0.5rem;
       .username{
         h2{

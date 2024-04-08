@@ -79,12 +79,12 @@ const ChatInputContainer=styled.div`
       }
     }
     button{
-      padding:0.3rem 2rem;
+      padding:0.3rem 1.5rem;
       border-radius:2rem;
       display:flex;
       justify-content:center;
       align-items:center;
-      background-color:#9a86f3;
+      background-color:#0ba6ff;
       border:none;
       @media screen and (min-width:360px)and(max-width:480px){
         padding:0.3rem 1rem;

@@ -52,7 +52,7 @@ const Chat = () => {
 
 
   return (
-    <ChatContainer>
+    <ChatContainer currentChat={currentChat}>
       <div className='container'>
         <Contact contacts={contacts} currentUser={currentUser} changeChat={handleChatChange}/>
         {
