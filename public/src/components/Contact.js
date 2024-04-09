@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import logo from "../assets/logo2.jpg";
 import ContactContainer from "../assets/styles/ContactContainer";
+import ContactShimmer from "./ContactShimmer";
 const Contact = ({ contacts, currentUser,changeChat }) => {
   const [currentUserName, setCurrentUserName] = useState(undefined);
   const [currentUserImage, setCurrentUserImage] = useState(undefined);
@@ -24,8 +25,9 @@ const Contact = ({ contacts, currentUser,changeChat }) => {
           <div className="brand">
             <img src={logo} alt="logo" />
             <h3>AniTalk</h3>
-          </div>
-          <div className="contacts">
+          </div>{
+            !contacts?<ContactShimmer/>:
+            (<div className="contacts">
             {contacts.map((contact, index) => {
               return (
                 <div
@@ -44,7 +46,9 @@ const Contact = ({ contacts, currentUser,changeChat }) => {
                 </div>
               );
             })}
-          </div>
+          </div>)
+          }
+          
           <div className="current-user">
             <div className="avatar">
               <img src={currentUserImage} alt="avatar" />

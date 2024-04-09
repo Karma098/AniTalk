@@ -15,6 +15,13 @@ const ChatComponentContainer=styled.div`
     align-items:center;
     padding:0.2rem;
     .user-details{
+      button{
+        background-color:#0ba6ff;
+          border:none;
+          padding:0.3rem;
+          border-radius:100%;
+          cursor:pointer;
+      }
       display:flex;
       align-items:center;
       gap:1rem;

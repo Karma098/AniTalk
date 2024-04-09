@@ -8,10 +8,12 @@ import axios from "axios";
 import { loginRoute } from "../utils/APIRoutes";
 import {handleValidationLogin,  toastOptions } from "../utils/Validation";
 import FormContainer from "../assets/styles/FormContainer";
+import Button from 'react-bootstrap-button-loader';
 
 
 const Login = () => {
   const [showPassword,setShowPassword]=useState(false);
+  const [isLoading,setIsLoading]=useState(false);
 
   const [values,setValues]=useState({
     username:"",
@@ -26,8 +28,8 @@ const Login = () => {
     }
   },[]);
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+  const handleSubmit = async () => {
+    
     if(handleValidationLogin(values)){
       const {password,username}=values;
       const {data}=await axios.post(loginRoute,{username,password,});
@@ -36,6 +38,7 @@ const Login = () => {
       };
       if(data.status===true){
         localStorage.setItem("AniTalk-user",JSON.stringify(data.user));
+        setIsLoading(true);
         navigate('/');
       }
     }
@@ -48,7 +51,7 @@ const Login = () => {
   return (
     <>
       <FormContainer>
-        <form onSubmit={(event) => handleSubmit(event)}>
+        <form onSubmit={(e)=>e.preventDefault()}>
           <div className="brand">
             <img src={logo} alt="" />
             <h1>AniTalk</h1>
@@ -69,9 +72,10 @@ const Login = () => {
             />
             <button className="password-btn" onClick={()=>setShowPassword(!showPassword)}>{showPassword?<FaEyeSlash/>:<FaEye/>}</button>
           </div>
-          <button type="submit">
+            {isLoading?<Button loading={true} disabled={true}></Button>:<button type="submit" onClick={handleSubmit}>
             Login
-          </button>
+          </button>}
+          
           <span>Don't have an account? <Link to='/register'> Register</Link></span>
         </form>
       </FormContainer>

@@ -2,12 +2,11 @@ import React, { useEffect, useRef, useState } from 'react'
 import ChatComponentContainer from '../assets/styles/ChatComponentContainer';
 import Logout from './Logout';
 import ChatInput from './ChatInput';
-import Messages from './Messages';
 import axios from "axios";
 import { getAllMessagesRoute, sendMessageRoute } from '../utils/APIRoutes';
 import {v4 as uuidv4} from "uuid";
-
-const ChatComponent = ({currentChat, currentUser,socket}) => {
+import {ArrowLeft} from 'react-bootstrap-icons';
+const ChatComponent = ({currentChat, currentUser,socket,setCurrentChat}) => {
 
   const [messages,setMessages]=useState([]);
   const [arrivalMessage,setArrivalMessage]=useState(null);
@@ -64,6 +63,9 @@ const ChatComponent = ({currentChat, currentUser,socket}) => {
     <ChatComponentContainer>
       <div className='chat-header'>
         <div className='user-details'>
+          <div>
+            <button onClick={()=>{setCurrentChat(undefined)}}><ArrowLeft/></button>
+          </div>
           <div className='avatar'>
           <img src={currentChat?.avatarImage} alt="avatar" />
           </div>

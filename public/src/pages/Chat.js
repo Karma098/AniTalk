@@ -58,7 +58,7 @@ const Chat = () => {
         {
           currentChat===undefined?
           <Welcome currentUser={currentUser}/>:
-          <ChatComponent currentChat={currentChat} currentUser={currentUser} socket={socket}/>
+          <ChatComponent currentChat={currentChat} currentUser={currentUser} socket={socket} setCurrentChat={setCurrentChat}/>
         }
       </div>
     </ChatContainer>
