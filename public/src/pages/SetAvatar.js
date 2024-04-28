@@ -15,104 +15,104 @@ const SetAvatar = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [selectedAvatar, setSelectedAvatar] = useState(undefined);
 
-  useEffect(()=>{
-    if(!localStorage.getItem("AniTalk-user")){
-      navigate('/login');
+  useEffect(() => {
+    if (!localStorage.getItem("AniTalk-user")) {
+      navigate("/login");
     }
-  },[]);
-
+  }, []);
 
   const setProfilePicture = async () => {
-    if(selectedAvatar===undefined){
-      toast.error("PLease pick an avatar",toastOptions);
-    }else{
-      const user=await JSON.parse(localStorage.getItem("AniTalk-user"));
-      const route=`${setAvatarRoute}/${user._id}`;
-      const {data}=await axios.put(route,{
-        image:avatars[selectedAvatar],
+    if (selectedAvatar === undefined) {
+      toast.error("PLease pick an avatar", toastOptions);
+    } else {
+      const user = await JSON.parse(localStorage.getItem("AniTalk-user"));
+      const route = `${setAvatarRoute}/${user._id}`;
+      const { data } = await axios.put(route, {
+        image: avatars[selectedAvatar],
       });
       // console.log(data);
-      if(data.isSet){
-        user.isAvatarImageSet=true;
-        user.avatarImage=data.image;
-        localStorage.setItem("AniTalk-user",JSON.stringify(user));
+      if (data.isSet) {
+        user.isAvatarImageSet = true;
+        user.avatarImage = data.image;
+        localStorage.setItem("AniTalk-user", JSON.stringify(user));
         navigate("/");
-      }else{
-        toast.error("Error setting avatar, Please try again",toastOptions);
+      } else {
+        toast.error("Error setting avatar, Please try again", toastOptions);
       }
     }
   };
 
-
-useEffect(() => {
-  const fetchData = async () => {
+  useEffect(() => {
+    const fetchData = async () => {
       console.log("ding1");
       const promises = [];
       const data = [];
       while (data.length < 4) {
-          for (let i = data.length; i < 4; i++) {
-              const index = Math.floor(Math.random() * 9);
-              const anime = ANIME_ARRAY[index];
-              const gender = JSON.parse(localStorage.getItem('AniTalk-user'))?.gender;
-              const animeCount = Math.floor(Math.random() * 50) + 1;
-              const avatar = AVATAR_URL + anime + "/" + gender + "/" + animeCount + ".jpg";
-              promises.push(fetch(avatar).then(response => {
-                  if (response.status !== 404) {
-                      data.push(avatar);
-                  }
-              }));
-          }
-          await Promise.all(promises); // Wait for all promises to resolve before checking if more avatars need to be fetched
+        for (let i = data.length; i < 4; i++) {
+          const index = Math.floor(Math.random() * 9);
+          const anime = ANIME_ARRAY[index];
+          const gender = JSON.parse(
+            localStorage.getItem("AniTalk-user")
+          )?.gender;
+          const animeCount = Math.floor(Math.random() * 50) + 1;
+          const avatar =
+            AVATAR_URL + anime + "/" + gender + "/" + animeCount + ".jpg";
+          promises.push(
+            fetch(avatar).then((response) => {
+              if (response.status !== 404) {
+                data.push(avatar);
+              }
+            })
+          );
+        }
+        await Promise.all(promises);
       }
       setAvatars(data);
       console.log("ding ding");
       setIsLoading(false);
     };
-    
+
     fetchData();
-}, []);
-
-
-
+  }, []);
 
   return (
     <>
-    {
-      isLoading?<Container>
-        <img src={loader} alt="loader" className="loader"/>
-      </Container>:(
-
+      {isLoading ? (
         <Container>
-        <div className="title-container">
-          <h1>Pick an avatar as your profile picture</h1>
-        </div>
-        <div className="avatars">
-          {avatars.map((avatar, index) => {
-            // console.log(avatar);
-            return (
-              <div
-                key={index}
-                className={`avatar ${
-                  selectedAvatar === index ? "selected" : ""
-                }`}
-              >
-                <img 
-                src={avatar} 
-                alt='avatar'
-                onClick={()=>setSelectedAvatar(index)}
-                />
-              </div>
-            );
-          })}
-        </div>
-        <button className="submit-btn" onClick={setProfilePicture}>Set as Profile Picture</button>
-      </Container>
-        )
-      }
+          <img src={loader} alt="loader" className="loader" />
+        </Container>
+      ) : (
+        <Container>
+          <div className="title-container">
+            <h1>Pick an avatar as your profile picture</h1>
+          </div>
+          <div className="avatars">
+            {avatars.map((avatar, index) => {
+              // console.log(avatar);
+              return (
+                <div
+                  key={index}
+                  className={`avatar ${
+                    selectedAvatar === index ? "selected" : ""
+                  }`}
+                >
+                  <img
+                    src={avatar}
+                    alt="avatar"
+                    onClick={() => setSelectedAvatar(index)}
+                  />
+                </div>
+              );
+            })}
+          </div>
+          <button className="submit-btn" onClick={setProfilePicture}>
+            Set as Profile Picture
+          </button>
+        </Container>
+      )}
       <ToastContainer />
     </>
   );
 };
-
 
 export default SetAvatar;
